@@ -8,3 +8,20 @@ class Product:
         self.quantity = quantity
         self.price = price
         self.information = information
+
+    def change_price(self, new_price):
+        if new_price <=0 :
+            raise ValueError ("price can not be negetive!!")
+        self.price = new_price
+    def change_quantity(self, new_quantity):
+        if new_quantity <0:
+            raise ValueError("quantity can not be negetive!!")
+        self.quantity = new_quantity
+    def validation_of_quantity_befor_sold(self, number_of_order):
+        if self.quantity- number_of_order<0:
+            raise ValueError ("not enough inventory!!")
+
+    def __str__(self):
+        return f"""product id : {self.product_id}\nname : {self.name}\n
+          category : {self.category}\nquantity : {self.quantity}\n price : {self.price}
+          \ninformation : {self.information}"""
