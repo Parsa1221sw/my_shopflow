@@ -19,7 +19,9 @@ class Product:
         self.quantity = new_quantity
     def validation_of_quantity_befor_sold(self, number_of_order):
         if self.quantity- number_of_order<0:
-            raise ValueError ("not enough inventory!!")
+            return False
+        else: 
+            return True
 
     def __str__(self):
         return f"""product id : {self.product_id}\nname : {self.name}\n
