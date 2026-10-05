@@ -13,3 +13,9 @@ class Order:
     def add_items(self, new_item):
         self.items.append(new_item)
         self.total_price += new_item.total_price_this_order_items()
+        
+    def find_item_by_id(self, id):
+        for i in self.items:
+            if i.order_item_id==id:
+                return i
+        return 0

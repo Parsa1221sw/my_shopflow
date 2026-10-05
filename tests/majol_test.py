@@ -24,8 +24,8 @@ def test_product_majol_class():
 
 def test_order_item_majol_class():
     product1 = Product(23, "laptop" , "just test" , 221 , 123 , "just test")
-    order_item1 = Order_item(23,product1 , 12 , 123)
+    order_item1 = Order_item(23,12 ,23 , 12 , 123)
     assert product1.validation_of_quantity_befor_sold(12) == True
     assert order_item1.total_price_this_order_items()== (12*123)
-    assert order_item1.product.name== "laptop"
+    assert order_item1.product_id== 23
     assert order_item1.item_price ==123
