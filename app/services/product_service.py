@@ -1,12 +1,28 @@
 from app.majol.product import Product
-
+from app.repositories.product_repository import Product_Repository
 
 class Product_Service():
     products = []
+    product_repositoty = Product_Repository()
+
+    @classmethod
+    def get_data_from_repository(cls):
+        data = cls.product_repositoty.get_product_json()
+        for key , item in data:
+            cls.load_product(key ,item["name"],item["category"],item["quantity"],item["price"],item["information"])
+
     @classmethod
     def add_product(cls,new_product_id,new_name,new_category,new_quantity,new_price,new_information):
         new_product = Product(new_product_id,new_name,new_category,new_quantity,new_price,new_information)
         cls.products.append(new_product)
+        data = new_product.merge_for_json_type()
+        cls.product_repositoty.add_product( new_product_id,data)
+
+    @classmethod
+    def load_product(cls,new_product_id,new_name,new_category,new_quantity,new_price,new_information):
+        new_product = Product(new_product_id,new_name,new_category,new_quantity,new_price,new_information)
+        cls.products.append(new_product)
+        
 
     @classmethod
     def remove_product(cls ,id):
@@ -14,6 +30,7 @@ class Product_Service():
         if obj==0:
             return "this id not exist"
         cls.products.remove(obj)
+        cls.product_repositoty.delete_product(id)
     @classmethod
     def update_product(cls , id, name= None , category= None , price = None, information = None):
         

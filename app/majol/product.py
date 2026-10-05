@@ -27,3 +27,12 @@ class Product:
         return f"""product id : {self.product_id}\nname : {self.name}\n
           category : {self.category}\nquantity : {self.quantity}\n price : {self.price}
           \ninformation : {self.information}"""
+    def merge_for_json_type(self):
+        data = { self.product_id :{
+            "name" : self.name , 
+            "category" : self.category,
+            "quantity" : self.quantity,
+            "price" : self.price,
+            "information" : self.information
+        }}
+        return data
