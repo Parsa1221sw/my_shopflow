@@ -1,0 +1,15 @@
+{
+    "22": {
+        "name": "ps5",
+        "category": "just test",
+        "quantity": 120,
+        "price": 500,
+        "information": "just test"
+    },
+    "3": {
+        "name": "air pod",
+        "category": "tecknologia",
+        "quantity": 120,
+        "price": 99.99,
+        "information": "color : wite  , nois canceling"}
+}
