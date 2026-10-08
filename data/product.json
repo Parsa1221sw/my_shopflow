@@ -13,13 +13,6 @@
         "price": 99.99,
         "information": "color : wite  , nois canceling"
     },
-    "23": {
-        "name": "laptop",
-        "category": "just test",
-        "quantity": 100,
-        "price": 123,
-        "information": "just test"
-    },
     "7": {
         "name": "air pod",
         "category": "tecknologia",
@@ -27,11 +20,11 @@
         "price": 99.99,
         "information": "color : wite  , nois canceling"
     },
-    "2": {
-        "name": "ps3",
-        "category": "teck",
-        "quantity": 3000,
-        "price": 599,
-        "information": "color : green , weight : 3kg"
+    "23": {
+        "name": "ali",
+        "category": "just test",
+        "quantity": 500,
+        "price": 315,
+        "information": "just test"
     }
 }

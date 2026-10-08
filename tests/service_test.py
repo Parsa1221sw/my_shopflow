@@ -6,7 +6,7 @@ from app.services.order_service import Order_Service
 from app.majol.order import Order
 
 def test_product_service_class():
-    service1 = Product_Service()
+    service1 = Product_Service("product_test.json")
     service1.add_product(22, "ps5" , "just test" , 120,500 , "just test")    
     service1.add_product(23, "laptop" , "just test" , 100 , 123 , "just test")
     service1.add_product(13, "mobile" , "just test" , 100 , 200 , "just test")
@@ -33,7 +33,7 @@ def test_product_service_class():
 
 def test_customer_service_class():
 
-    service1 = Customer_Service
+    service1 = Customer_Service()
     service1.add_customer(3, "parsa" , "fathollahi ", "0432342323")
     service1.add_customer(111, "parsa" , "fathollahi ", "0432342323")
     service1.add_customer(32, "ali" , "mohamadi", "39433040", "ali@gmail.com")
@@ -75,13 +75,13 @@ def test_order_service_class():
     obj5 =service.add_order_item(13, 1 , 20 , 3 )
     assert obj5 =="this product id not exist!"
 
-    obj6 =service.add_order_item(13, 1 , 23 , 520)
+    obj6 =service.add_order_item(13, 1 , 3, 520)
     assert obj6 =="more than exist!"
-    service.add_order_item(13, 1 ,23 ,3)
-    obj7 = Product_Service.find_product_by_id(23)
-    assert obj7.quantity == 497
+    service.add_order_item(13, 1 ,3 ,3)
+    obj7 = service.product_service.find_product_by_id(3)
+    assert obj7.quantity == 197
     obj8 = service.find_order_by_id(13)
-    assert obj8.total_price == 945
+    assert obj8.total_price == 3 * (99.99)
     service.add_order_item(13 , 2 , 22 ,2)
     obj9= service.find_order_by_id(13 )
     obj10 = obj9.find_item_by_id(1)

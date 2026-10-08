@@ -1,4 +1,18 @@
 {
+    "12": {
+        "name": "parsa",
+        "category": "heoman",
+        "quantity": 122,
+        "price": 100,
+        "information": "test"
+    },
+    "3": {
+        "name": "laptop",
+        "category": "tecknologia",
+        "quantity": 200,
+        "price": 99.99,
+        "information": "color : wite  , nois canceling"
+    },
     "22": {
         "name": "ps5",
         "category": "just test",
@@ -6,10 +20,11 @@
         "price": 500,
         "information": "just test"
     },
-    "3": {
-        "name": "air pod",
-        "category": "tecknologia",
-        "quantity": 120,
-        "price": 99.99,
-        "information": "color : wite  , nois canceling"}
+    "23": {
+        "name": "ali",
+        "category": "just test",
+        "quantity": 500,
+        "price": 315,
+        "information": "just test"
+    }
 }

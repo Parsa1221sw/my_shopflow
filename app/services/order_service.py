@@ -6,6 +6,7 @@ from app.services.product_service import Product_Service
 
 class Order_Service():
     order_data = []
+    product_service = Product_Service("product_test.json")
     @classmethod
     def add_order(cls ,order_id ,customer_id, date , status):
         obj = Customer_Service.find_customer_by_id(customer_id)
@@ -22,7 +23,7 @@ class Order_Service():
         if order_obj ==0:
             return "this order id not exist!"
         
-        product_obj = Product_Service.find_product_by_id(product_id)
+        product_obj = cls.product_service.find_product_by_id(product_id)
         if product_obj == 0:
             return "this product id not exist!"
         

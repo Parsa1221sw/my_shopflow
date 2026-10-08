@@ -3,36 +3,39 @@ from pathlib import Path
 
 class Product_Repository():
 
-    @classmethod
-    def get_product_json(cls):
+    def __init__(self , adress ="product.json" ):
+        self.adress = adress
+
+    def get_product_json(self):
         base_adress = Path(__file__).resolve().parents[2]
-        adress = base_adress / "data" / "product.json"
+        adress = base_adress / "data" / self.adress
         with open (adress, "r") as file:
             data = json.load(file)
             return data
-    @classmethod
-    def add_product(cls, product_id,new_data):
-        data = cls.get_product_json()
+
+    def add_product(self, product_id,new_data):
+        data = self.get_product_json()
         data[product_id] = new_data
-        cls.push_product_json(data)
+        self.push_product_json(data)
     
-    @classmethod
-    def push_product_json(cls, data):
+
+    def push_product_json(self, data):
         base_adress = Path(__file__).resolve().parents[2]
-        adress = base_adress / "data" / "product.json"
+        adress = base_adress / "data" / self.adress
         with open (adress, "w") as file:
             json.dump(data , file , indent= 4)
 
-    @classmethod
-    def find_product_by_id(cls, product_id):
-        data = cls.get_product_json()
+
+    def find_product_by_id(self, product_id):
+        data = self.get_product_json()
+        id = str(product_id)
         for i , j in data.items():
-            if i == product_id:
-                # for this part i will come back and make new string for this
-                return i , j
-    @classmethod
-    def delete_product(cls , product_id):
-        data = cls.get_product_json()
+            if i == id:
+                return  dict(j)
+        return "this product not exist!"
+
+    def delete_product(self , product_id):
+        data = self.get_product_json()
         del data[str(product_id)]
-        cls.push_product_json(data)
+        self.push_product_json(data)
 

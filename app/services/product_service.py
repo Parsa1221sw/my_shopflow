@@ -2,39 +2,40 @@ from app.majol.product import Product
 from app.repositories.product_repository import Product_Repository
 
 class Product_Service():
-    products = []
-    product_repositoty = Product_Repository()
-
-    @classmethod
-    def get_data_from_repository(cls ):
-        data = cls.product_repositoty.get_product_json()
+    
+    def __init__(self , json_file_name = None):
+        if json_file_name == None:
+            self.product_repositoty = Product_Repository()
+        else:
+            self.product_repositoty = Product_Repository(json_file_name)
+        self.products = []
+        self.get_data_from_repository()
+    def get_data_from_repository(self ):
+        data = self.product_repositoty.get_product_json()
         for key , item in data.items():
-            cls.load_product(int(key) ,item["name"],item["category"],item["quantity"],item["price"],item["information"])
+            self.load_product(int(key) ,item["name"],item["category"],item["quantity"],item["price"],item["information"])
 
-    @classmethod
-    def add_product(cls,new_product_id,new_name,new_category,new_quantity,new_price,new_information):
+    def add_product(self,new_product_id,new_name,new_category,new_quantity,new_price,new_information):
         new_product = Product(new_product_id,new_name,new_category,new_quantity,new_price,new_information)
-        cls.products.append(new_product)
+        self.products.append(new_product)
         data = new_product.merge_for_json_type()
-        cls.product_repositoty.add_product( new_product_id, data)
+        self.product_repositoty.add_product( new_product_id, data)
 
-    @classmethod
-    def load_product(cls,new_product_id,new_name,new_category,new_quantity,new_price,new_information):
+    def load_product(self,new_product_id,new_name,new_category,new_quantity,new_price,new_information):
         new_product = Product(new_product_id,new_name,new_category,new_quantity,new_price,new_information)
-        cls.products.append(new_product)
+        self.products.append(new_product)
         
 
-    @classmethod
-    def remove_product(cls ,id):
-        obj = cls.find_product_by_id(id)
+    def remove_product(self ,id):
+        obj = self.find_product_by_id(id)
         if obj==0:
             return "this id not exist"
-        cls.products.remove(obj)
-        cls.product_repositoty.delete_product(id)
-    @classmethod
-    def update_product(cls , id, name= None , category= None , price = None, information = None):
+        self.products.remove(obj)
+        self.product_repositoty.delete_product(id)
+
+    def update_product(self, id, name= None , category= None , price = None, information = None):
         
-        obj = cls.find_product_by_id(id)
+        obj = self.find_product_by_id(id)
         if obj==0:
             return "this id not exist"
         
@@ -55,23 +56,22 @@ class Product_Service():
         else:
             obj.information = information
 
-        cls.product_repositoty.delete_product(id)
+        self.product_repositoty.delete_product(id)
         data = obj.merge_for_json_type()
-        cls.product_repositoty.add_product(id ,data )
-    @classmethod
-    def change_quantity(cls , id , new_new_quantity):
+        self.product_repositoty.add_product(id ,data )
+
+    def change_quantity(self , id , new_new_quantity):
         
-        obj = cls.find_product_by_id(id)
+        obj = self.find_product_by_id(id)
         if obj==0:
             return "this id not exist"
         obj.change_quantity(new_new_quantity)
-        cls.product_repositoty.delete_product(id)
+        self.product_repositoty.delete_product(id)
         data = obj.merge_for_json_type()
-        cls.product_repositoty.add_product(id , data)
+        self.product_repositoty.add_product(id , data)
 
-    @classmethod
-    def find_product_by_id(cls , productid):
-        for i in cls.products:
+    def find_product_by_id(self , productid):
+        for i in self.products:
             
             if i.product_id == productid:
                 return i
