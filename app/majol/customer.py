@@ -12,3 +12,12 @@ class Customer:
         return f"""customer id : {self.customer_id}\nname : {self.name}\n
         last name : {self.last_name}\nphone : {self.phone}
         \nemail : {self.email}"""
+
+    def merge_for_repository(self):
+        data = {
+            "name" : self.name,
+            "last_name": self.last_name,
+            "phone": self.phone,
+            "email" : self.email
+        }
+        return data

@@ -6,8 +6,9 @@ from app.repositories.order_repository import Order_Repository
 from app.repositories.order_item_repository import Order_Item_Repository
 
 class Order_Service():
-    def __init__(self , order_repo_a = "order.json",order_rep_item_a ="order_item.json", produt_a = "product.json" ):
+    def __init__(self , order_repo_a = "order.json",order_rep_item_a ="order_item.json", produt_a = "product.json",customer_ad ="customer.json" ):
         self.order_data = []
+        self.customer_service = Customer_Service(customer_ad) 
         self.product_service = Product_Service(produt_a)
         self.order_repository = Order_Repository(order_repo_a)
         self.order_item_repository = Order_Item_Repository(order_rep_item_a)
@@ -24,7 +25,8 @@ class Order_Service():
         self.order_data.append(new_order_load)
 
     def add_order(self ,order_id ,customer_id, date , status):
-        obj = Customer_Service.find_customer_by_id(customer_id)
+        obj = self.customer_service.find_customer_by_id(customer_id)
+        print(obj)
         if obj ==0:
             return "this customer id not exist!"
         else:
