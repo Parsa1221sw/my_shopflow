@@ -3,7 +3,7 @@ from pathlib import Path
 
 class Product_Repository():
 
-    def __init__(self , adress ="product.json" ):
+    def __init__(self , adress ):
         self.adress = adress
 
     def get_product_json(self):

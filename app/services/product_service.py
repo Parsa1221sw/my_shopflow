@@ -3,13 +3,11 @@ from app.repositories.product_repository import Product_Repository
 
 class Product_Service():
     
-    def __init__(self , json_file_name = None):
-        if json_file_name == None:
-            self.product_repositoty = Product_Repository()
-        else:
-            self.product_repositoty = Product_Repository(json_file_name)
+    def __init__(self , json_file_name = "product.json"):
+        self.product_repositoty = Product_Repository(json_file_name)
         self.products = []
         self.get_data_from_repository()
+        
     def get_data_from_repository(self ):
         data = self.product_repositoty.get_product_json()
         for key , item in data.items():

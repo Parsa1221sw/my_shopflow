@@ -19,3 +19,6 @@ class Order:
             if i.order_item_id==id:
                 return i
         return 0
+    def merge_dic_for_json_type(self ):
+            data = {"customer_id" : self.customer_id , "date" : self.date , "status" : self.status}
+            return data
