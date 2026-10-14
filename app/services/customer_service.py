@@ -18,7 +18,8 @@ class Customer_Service():
         new_customer = Customer(customer_id , name, last_name , phone ,email)
         self.customers_data.append(new_customer)
 
-    def add_customer(self, customer_id , name , last_name , phone  , email  = None):
+    def add_customer(self , name , last_name , phone  , email  = None):
+        customer_id = len(self.customers_data)+1
         new_customer = Customer( customer_id , name , last_name , phone  , email)
         self.customers_data.append(new_customer)
         self.customer_repository.add_customer( customer_id, new_customer.merge_for_repository())
