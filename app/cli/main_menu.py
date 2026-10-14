@@ -1,5 +1,5 @@
 import app.cli.func as func
-
+from app.cli.product_menu import product_menu
 from app.cli.customer_menu import customer_menu
 from app.services.order_service import Order_Service
 from app.services.product_service import Product_Service
@@ -24,6 +24,6 @@ def main_menu(customer_service , product_service , order_service):
         elif number ==2:
             customer_menu(customer_service , order_service)
         elif number ==3 :
-            product_menu()    
+            product_menu(product_service)    
         elif number ==0:
             break

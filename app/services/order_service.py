@@ -11,7 +11,7 @@ class Order_Service():
                  produt_a = "product.json",customer_ad ="customer.json" , ):
         self.order_data = []
         self.customer_service = customer_servicc 
-        self.product_service = product_servicec
+        self.product_service = product_servicec 
         self.order_repository = Order_Repository(order_repo_a)
         self.order_item_repository = Order_Item_Repository(order_rep_item_a)
         self.add_order_from_repository()
