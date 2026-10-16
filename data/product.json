@@ -9,22 +9,36 @@
     "2": {
         "name": "mobile",
         "category": "teck",
-        "quantity": "100",
-        "price": "500",
+        "quantity": 76,
+        "price": 500,
         "information": "color green small and beutifull"
+    },
+    "3": {
+        "name": "mina",
+        "category": "dfdfd",
+        "quantity": 111,
+        "price": 99,
+        "information": "ddfd"
     },
     "4": {
         "name": "sara",
         "category": "dfdf",
-        "quantity": 2434,
+        "quantity": 2423,
         "price": 434,
         "information": "fgf"
     },
     "5": {
         "name": "laptop",
         "category": "teck",
-        "quantity": "300",
-        "price": "1000",
+        "quantity": 300,
+        "price": 1000,
         "information": "pass"
+    },
+    "6": {
+        "name": "ws",
+        "category": "ws",
+        "quantity": 10,
+        "price": 12,
+        "information": "sd"
     }
 }

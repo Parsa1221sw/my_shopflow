@@ -64,14 +64,11 @@ class Order_Service():
 
     def add_order_item(self , order_id   , product_id , quantity, flag2=-1 ):
         order_obj = self.find_order_by_id(order_id)
-
         if order_obj ==0:
             return "this order id not exist!"
-        
         product_obj = self.product_service.find_product_by_id(product_id)
         if product_obj == 0:
             return "this product id not exist!"
-        
         is_valid= product_obj.validation_of_quantity_befor_sold(quantity)
         if is_valid == False:
             return "more than exist!"
@@ -92,7 +89,7 @@ class Order_Service():
             product_obj.quantity -=quantity
             self.product_service.change_quantity(product_id, product_obj.quantity)
             self.order_item_repository.add_order_item(str(flag2) , new_item.merge_dict_for_json_type())
-
+            return 0
     def remove_order(self, id):
         obj = self.find_order_by_id(id)
         if obj ==0:
