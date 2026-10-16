@@ -22,6 +22,8 @@ def show_product(product_service):
             print("enter prodcut id : ")
             num = func.try_or_exept_integer_all_menu(0)
             obj = product_service.find_product_by_id(num)
+            if obj == 0:
+                continue
             while(True):
                 print("name", obj.name)
                 print("category", obj.category)

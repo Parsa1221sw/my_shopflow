@@ -43,7 +43,6 @@ class Product_Service():
 
     def remove_product(self ,id):
         obj = self.find_product_by_id(id)
-        print(obj.name)
         if obj==0:
             return "this id not exist"
         self.products.remove(obj)

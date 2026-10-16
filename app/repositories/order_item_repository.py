@@ -32,8 +32,15 @@ class Order_Item_Repository():
         return "this order items id not exist!"
     
     def push_order_item_json(self, data):
+        empty = []
+        for i in data.keys():
+            empty.append(int(i))
+            empty.sort()
+            new_data = {}
+            for i in empty:
+                new_data[str(i)] = data[str(i)]
         base_adress = Path(__file__).resolve().parents[2]
         adress = base_adress / "data" / self.adress
         with open (adress, "w") as file:
-            json.dump(data , file , indent= 4)
+            json.dump(new_data , file , indent= 4)
     

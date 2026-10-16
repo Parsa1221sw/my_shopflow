@@ -4,7 +4,7 @@ from app.cli.customer_menu import customer_menu
 from app.services.order_service import Order_Service
 from app.services.product_service import Product_Service
 from app.services.customer_service import Customer_Service
-
+from app.cli.order_menu import order_menu
 def start_program():
     customer_service = Customer_Service()
     product_service = Product_Service()
@@ -20,7 +20,7 @@ def main_menu(customer_service , product_service , order_service):
         print("\nChose : ")
         number = func.try_or_exept_integer_main_menu(0 , 3)
         if number ==1:
-            order_menu()
+            order_menu(order_service)
         elif number ==2:
             customer_menu(customer_service , order_service)
         elif number ==3 :

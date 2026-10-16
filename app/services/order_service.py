@@ -10,10 +10,11 @@ class Order_Service():
                  order_repo_a = "order.json",order_rep_item_a ="order_item.json",
                  produt_a = "product.json",customer_ad ="customer.json" , ):
         self.order_data = []
+        self.order_item_id_counter = []
         self.customer_service = customer_servicc 
         self.product_service = product_servicec 
-        self.order_repository = Order_Repository(order_repo_a)
-        self.order_item_repository = Order_Item_Repository(order_rep_item_a)
+        self.order_repository = Order_Repository()
+        self.order_item_repository = Order_Item_Repository()
         self.add_order_from_repository()
         self.get_order_item_from_repository()
 
@@ -26,17 +27,28 @@ class Order_Service():
         new_order_load = Order(order_id ,customer_id ,date, status)
         self.order_data.append(new_order_load)
 
-    def add_order(self ,order_id ,customer_id, date , status):
+    def add_order(self  ,customer_id, date , status , flag2=-1):
         obj = self.customer_service.find_customer_by_id(customer_id)
-        print(obj)
-        if obj ==0:
-            return "this customer id not exist!"
-        else:
-            obj2 = Order(order_id ,customer_id, date , status)
-            self.order_data.append(obj2)
-            type_json = obj2.merge_dic_for_json_type()
-            self.order_repository.add_order(order_id , type_json)
 
+        if obj ==0:
+            return ",,,this customer id not exist!"
+        if flag2==-1:
+            self.add_order_from_repository()
+            flag3 = 1
+            for i in self.order_data:
+                if i.order_id== flag3:
+                    flag3+=1
+                else:
+                    flag2 = flag3
+                    break
+            if flag2 ==-1:
+                flag2 = len(self.order_data)+1
+                    
+        obj2 = Order(flag2,customer_id, date , status)
+        self.order_data.append(obj2)
+        type_json = obj2.merge_dic_for_json_type()
+        self.order_repository.add_order(str(flag2) , type_json)
+        return 0
     def get_order_item_from_repository(self):
         data = self.order_item_repository.get_order_items_json()
         for i , j in data.items():
@@ -45,12 +57,14 @@ class Order_Service():
                 if int(j["order_id"]) == k.order_id:
                     new_data = self.load_order_item_from_repository(int(i) ,j["order_id"], j["product_id"], j["quantity"],j["price"])
                     k.add_items(new_data)
+                    self.order_item_id_counter.append(int(i))
     def load_order_item_from_repository(self ,order_item_id,order_id,product_id,quantity,price):
         new_item_order = Order_item(order_item_id,order_id,product_id,quantity,price)
         return new_item_order
 
-    def add_order_item(self , order_id  , order_item_id , product_id , quantity ):
+    def add_order_item(self , order_id   , product_id , quantity, flag2=-1 ):
         order_obj = self.find_order_by_id(order_id)
+
         if order_obj ==0:
             return "this order id not exist!"
         
@@ -62,11 +76,22 @@ class Order_Service():
         if is_valid == False:
             return "more than exist!"
         elif is_valid== True:
-            new_item = Order_item(order_item_id ,order_id , product_id , quantity , product_obj.price)
+            if flag2==-1:
+                self.add_order_from_repository()
+                flag3 = 1
+                for i in self.order_item_id_counter:
+                    if i== flag3:
+                        flag3+=1
+                    else:
+                        flag2 = flag3
+                        break
+                if flag2 ==-1:
+                    flag2 = len(self.order_item_id_counter)+1
+            new_item = Order_item(flag2 ,order_id , product_id , quantity , product_obj.price)
             order_obj.add_items(new_item)
             product_obj.quantity -=quantity
             self.product_service.change_quantity(product_id, product_obj.quantity)
-            self.order_item_repository.add_order_item(order_item_id , new_item.merge_dict_for_json_type())
+            self.order_item_repository.add_order_item(str(flag2) , new_item.merge_dict_for_json_type())
 
     def remove_order(self, id):
         obj = self.find_order_by_id(id)
